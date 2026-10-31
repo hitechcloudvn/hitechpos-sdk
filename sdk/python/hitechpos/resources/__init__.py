@@ -1,0 +1,1 @@
+"""HiTechPos resource groups."""

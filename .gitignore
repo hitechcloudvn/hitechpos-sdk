@@ -1,0 +1,36 @@
+# Node
+node_modules/
+dist/
+*.tsbuildinfo
+npm-debug.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+.pytest_cache/
+.venv/
+venv/
+
+# PHP
+/sdk/php/vendor/
+composer.lock
+.phpunit.result.cache
+
+# Go
+*.test
+*.out
+
+# Java
+target/
+*.class
+.gradle/
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store
+*.log
+.env
