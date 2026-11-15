@@ -13,6 +13,12 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - PHP SDK: add `phpunit.xml.dist` and smoke tests so `vendor/bin/phpunit`
   runs the suite instead of printing help and failing the test job.
 
+- Node.js SDK: replace the `jest` test script (jest is not installed, so
+  `npm test` failed with "jest: not found") with the built-in `node --test`
+  runner and a smoke test.
+- Python SDK: add pytest smoke tests so `pytest` collects a real suite (an
+  empty suite exits with code 5 and fails the test job).
+
 ## [1.0.0] - 2026-11-01
 
 ### Added

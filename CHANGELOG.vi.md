@@ -13,6 +13,11 @@ Dự án tuân theo [Semantic Versioning](https://semver.org/).
 - SDK PHP: thêm `phpunit.xml.dist` và smoke test để `vendor/bin/phpunit`
   chạy bộ test thay vì in help và fail job test.
 
+- SDK Node.js: thay script test `jest` (jest không được cài nên `npm test` lỗi
+  "jest: not found") bằng runner tích hợp `node --test` kèm smoke test.
+- SDK Python: thêm smoke test pytest để `pytest` có bộ test thật (bộ test rỗng
+  thoát mã 5 và fail job test).
+
 ## [1.0.0] - 2026-11-01
 
 ### Thêm
