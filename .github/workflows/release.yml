@@ -1,0 +1,46 @@
+# ===== HiTechPos SDK — Release =====
+# EN: Publish a GitHub Release when a v* tag is pushed. Notes are extracted from CHANGELOG.md.
+# VI: Phát hành GitHub Release khi đẩy tag v*. Ghi chú được trích xuất từ CHANGELOG.md.
+# Repos: https://github.com/hitechcloudvn/hitechpos-sdk · https://gitlab.com/hitechcloudvn/hitechpos-sdk
+
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: GitHub Release / Phát hành GitHub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout / Tải mã nguồn
+        uses: actions/checkout@v4
+
+      - name: Extract release notes / Trích xuất ghi chú phát hành
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          awk -v ver="$VERSION" '
+            $0 ~ "^## \\[" ver "\\]" { flag=1; next }
+            flag && $0 ~ /^## \[/ { exit }
+            flag { print }
+          ' CHANGELOG.md > release-notes.md
+          if [ ! -s release-notes.md ]; then
+            echo "No CHANGELOG.md section found for [$VERSION] / Không tìm thấy mục [$VERSION] trong CHANGELOG.md" >&2
+            exit 1
+          fi
+          echo "===== Release notes / Ghi chú phát hành ====="
+          cat release-notes.md
+
+      - name: Create GitHub Release / Tạo GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            --title "v${GITHUB_REF_NAME#v}" \
+            --notes-file release-notes.md \
+            --verify-tag

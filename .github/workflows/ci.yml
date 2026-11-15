@@ -1,0 +1,163 @@
+# ===== HiTechPos SDK — CI =====
+# EN: Continuous integration — build & test the SDKs, lint the OpenAPI spec.
+# VI: Tích hợp liên tục — build & test các SDK, kiểm tra đặc tả OpenAPI.
+# Repos: https://github.com/hitechcloudvn/hitechpos-sdk · https://gitlab.com/hitechcloudvn/hitechpos-sdk
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    name: Lint / Kiểm tra
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout / Tải mã nguồn
+        uses: actions/checkout@v4
+
+      - name: Set up Python / Cài đặt Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install validator / Cài đặt trình kiểm tra
+        run: pip install openapi-spec-validator
+
+      - name: Validate OpenAPI spec / Kiểm tra đặc tả OpenAPI
+        run: openapi-spec-validator openapi.json
+
+  python:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.9', '3.10', '3.11', '3.12']
+    defaults:
+      run:
+        working-directory: sdk/python
+    steps:
+      - name: Checkout / Tải mã nguồn
+        uses: actions/checkout@v4
+
+      - name: Set up Python / Cài đặt Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies / Cài đặt phụ thuộc
+        run: pip install -e ".[dev]"
+
+      - name: Run tests / Chạy test
+        run: pytest -q
+
+  nodejs:
+    name: Node.js ${{ matrix.node-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [18, 20, 22]
+    defaults:
+      run:
+        working-directory: sdk/nodejs
+    steps:
+      - name: Checkout / Tải mã nguồn
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js / Cài đặt Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies / Cài đặt phụ thuộc
+        run: npm install
+
+      - name: Build / Biên dịch
+        run: npm run build
+
+      - name: Run tests / Chạy test
+        run: npm test
+
+  php:
+    name: PHP ${{ matrix.php-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['8.1', '8.2', '8.3']
+    defaults:
+      run:
+        working-directory: sdk/php
+    steps:
+      - name: Checkout / Tải mã nguồn
+        uses: actions/checkout@v4
+
+      - name: Set up PHP / Cài đặt PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: openssl, json
+          coverage: none
+
+      - name: Install dependencies / Cài đặt phụ thuộc
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Syntax check / Kiểm tra cú pháp
+        run: find src -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Run tests / Chạy test
+        run: vendor/bin/phpunit
+
+  go:
+    name: Go ${{ matrix.go-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        go-version: ['1.21', '1.22']
+    defaults:
+      run:
+        working-directory: sdk/go
+    steps:
+      - name: Checkout / Tải mã nguồn
+        uses: actions/checkout@v4
+
+      - name: Set up Go / Cài đặt Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - name: Vet / Kiểm tra tĩnh
+        run: go vet ./...
+
+      - name: Run tests / Chạy test
+        run: go test ./...
+
+  java:
+    name: Java ${{ matrix.java-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        java-version: [17]
+    defaults:
+      run:
+        working-directory: sdk/java
+    steps:
+      - name: Checkout / Tải mã nguồn
+        uses: actions/checkout@v4
+
+      - name: Set up Java / Cài đặt Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.java-version }}
+          cache: maven
+
+      - name: Run tests / Chạy test
+        run: mvn -B test

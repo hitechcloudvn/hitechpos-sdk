@@ -1,0 +1,96 @@
+# ===== HiTechPos SDK — GitLab CI/CD =====
+# EN: Test the SDKs, lint the OpenAPI spec, and publish a GitLab Release on v* tags.
+# VI: Test các SDK, kiểm tra đặc tả OpenAPI, và phát hành GitLab Release khi có tag v*.
+# Repos: https://github.com/hitechcloudvn/hitechpos-sdk · https://gitlab.com/hitechcloudvn/hitechpos-sdk
+
+stages:
+  - test
+  - release
+
+default:
+  interruptible: true
+
+
+lint:
+  stage: test
+  image: python:3.12-alpine
+  script:
+    # EN: Validate the OpenAPI 3.0 specification. / VI: Kiểm tra đặc tả OpenAPI 3.0.
+    - pip install --no-cache-dir openapi-spec-validator
+    - openapi-spec-validator openapi.json
+
+
+test:python:
+  stage: test
+  image: python:3.12
+  script:
+    # EN: Install the SDK with dev extras and run pytest. / VI: Cài SDK kèm dev extras và chạy pytest.
+    - cd sdk/python
+    - pip install -e ".[dev]"
+    - pytest -q
+
+
+test:nodejs:
+  stage: test
+  image: node:20
+  script:
+    # EN: Install, build (tests import dist/), then test. / VI: Cài đặt, build (test import từ dist/), rồi chạy test.
+    - cd sdk/nodejs
+    - npm install
+    - npm run build
+    - npm test
+
+
+test:php:
+  stage: test
+  image: composer:2
+  script:
+    # EN: Install dependencies, syntax-check, run PHPUnit. / VI: Cài phụ thuộc, kiểm tra cú pháp, chạy PHPUnit.
+    - cd sdk/php
+    - composer install --no-interaction --prefer-dist
+    - find src -name '*.php' -print0 | xargs -0 -n1 php -l
+    - vendor/bin/phpunit
+
+
+test:go:
+  stage: test
+  image: golang:1.22
+  script:
+    # EN: Vet and test the Go SDK. / VI: Vet và test SDK Go.
+    - cd sdk/go
+    - go vet ./...
+    - go test ./...
+
+
+test:java:
+  stage: test
+  image: maven:3.9-eclipse-temurin-17
+  script:
+    # EN: Run the Maven test suite. / VI: Chạy bộ test Maven.
+    - cd sdk/java
+    - mvn -B test
+
+
+release:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^v/
+  script:
+    # EN: Extract the release notes from the CHANGELOG.md section for this version.
+    # VI: Trích xuất ghi chú phát hành từ mục tương ứng trong CHANGELOG.md.
+    - |
+      VERSION="${CI_COMMIT_TAG#v}"
+      awk -v ver="$VERSION" '
+        $0 ~ "^## \\[" ver "\\]" { flag=1; next }
+        flag && $0 ~ /^## \[/ { exit }
+        flag { print }
+      ' CHANGELOG.md > release-notes.md
+      if [ ! -s release-notes.md ]; then
+        echo "No CHANGELOG.md section found for [$VERSION] / Không tìm thấy mục [$VERSION] trong CHANGELOG.md" >&2
+        exit 1
+      fi
+  release:
+    tag_name: $CI_COMMIT_TAG
+    name: 'Release $CI_COMMIT_TAG'
+    description: './release-notes.md'
