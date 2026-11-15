@@ -1,5 +1,5 @@
 {
-  "name": "@hitechcloud-vietnam/hitechpos-sdk",
+  "name": "@hitechcloudvn/hitechpos-sdk",
   "version": "1.0.0",
   "description": "Official Node.js/TypeScript SDK for the HiTechPos sales & POS API",
   "main": "dist/index.js",
@@ -30,7 +30,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/hitechcloud-vietnam/hitechpos-sdk.git",
+    "url": "https://github.com/hitechcloudvn/hitechpos-sdk.git",
     "directory": "sdk/nodejs"
   },
   "homepage": "https://pos.hitechcloud.vn",
@@ -43,5 +43,8 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/hitechcloudvn/hitechpos-sdk/issues"
   }
 }

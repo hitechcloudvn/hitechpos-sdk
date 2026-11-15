@@ -36,7 +36,7 @@ except HiTechPosError as e:
 ## Node.js / TypeScript
 
 ```ts
-import { NotFoundError, RateLimitError, HiTechPosError } from "@hitechcloud-vietnam/hitechpos-sdk";
+import { NotFoundError, RateLimitError, HiTechPosError } from "@hitechcloudvn/hitechpos-sdk";
 
 try {
   await client.orders.get(shopId, "khong_ton_tai");

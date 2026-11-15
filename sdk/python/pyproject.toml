@@ -35,8 +35,8 @@ dev = ["pytest>=7.0", "responses>=0.23"]
 
 [project.urls]
 Homepage = "https://pos.hitechcloud.vn"
-Repository = "https://github.com/hitechcloud-vietnam/hitechpos-sdk"
-Issues = "https://github.com/hitechcloud-vietnam/hitechpos-sdk/issues"
+Repository = "https://github.com/hitechcloudvn/hitechpos-sdk"
+Issues = "https://github.com/hitechcloudvn/hitechpos-sdk/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]

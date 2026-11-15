@@ -1,35 +1,46 @@
 {
-    "name": "hitechcloud-vietnam/hitechpos-sdk",
-    "description": "Official PHP SDK for the HiTechPos sales & POS API",
-    "type": "library",
-    "license": "MIT",
-    "keywords": ["hitechpos", "hitechcloud", "pos", "sdk", "ecommerce", "api"],
-    "homepage": "https://pos.hitechcloud.vn",
-    "authors": [
-        {
-            "name": "HiTechCloud",
-            "email": "support@hitechcloud.vn"
-        }
-    ],
-    "require": {
-        "php": ">=8.0",
-        "guzzlehttp/guzzle": "^7.5"
+  "name": "hitechcloudvn/hitechpos-sdk",
+  "description": "Official PHP SDK for the HiTechPos sales & POS API",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "hitechpos",
+    "hitechcloud",
+    "pos",
+    "sdk",
+    "ecommerce",
+    "api"
+  ],
+  "homepage": "https://pos.hitechcloud.vn",
+  "authors": [
+    {
+      "name": "HiTechCloud",
+      "email": "support@hitechcloud.vn"
+    }
+  ],
+  "require": {
+    "php": ">=8.0",
+    "guzzlehttp/guzzle": "^7.5"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "HiTechCloud\\HiTechPos\\": "src/"
     },
-    "require-dev": {
-        "phpunit/phpunit": "^10.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "HiTechCloud\\HiTechPos\\": "src/"
-        },
-        "files": [
-            "src/Exceptions.php"
-        ]
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "HiTechCloud\\HiTechPos\\Tests\\": "tests/"
-        }
-    },
-    "minimum-stability": "stable"
+    "files": [
+      "src/Exceptions.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "HiTechCloud\\HiTechPos\\Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "stable",
+  "support": {
+    "issues": "https://github.com/hitechcloudvn/hitechpos-sdk/issues",
+    "source": "https://github.com/hitechcloudvn/hitechpos-sdk"
+  }
 }

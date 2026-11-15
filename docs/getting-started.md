@@ -18,13 +18,13 @@ Hướng dẫn này giúp bạn kết nối HiTechPos API trong vài phút: tạ
 pip install hitechpos
 
 # Node.js / TypeScript
-npm install @hitechcloud-vietnam/hitechpos-sdk
+npm install @hitechcloudvn/hitechpos-sdk
 
 # PHP
-composer require hitechcloud-vietnam/hitechpos-sdk
+composer require hitechcloudvn/hitechpos-sdk
 
 # Go
-go get github.com/hitechcloud-vietnam/hitechpos-sdk/go
+go get github.com/hitechcloudvn/hitechpos-sdk/go
 
 # Java (Maven)
 # <dependency><groupId>vn.hitechcloud</groupId><artifactId>hitechpos-sdk</artifactId><version>1.0.0</version></dependency>

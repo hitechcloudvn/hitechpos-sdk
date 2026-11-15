@@ -11,7 +11,7 @@
 
     <name>HiTechPos Java SDK</name>
     <description>Official Java SDK for the HiTechPos sales &amp; POS API</description>
-    <url>https://github.com/hitechcloud-vietnam/hitechpos-sdk</url>
+    <url>https://github.com/hitechcloudvn/hitechpos-sdk</url>
 
     <licenses>
         <license>
@@ -19,6 +19,12 @@
             <url>https://opensource.org/licenses/MIT</url>
         </license>
     </licenses>
+    <scm>
+        <connection>scm:git:https://github.com/hitechcloudvn/hitechpos-sdk.git</connection>
+        <developerConnection>scm:git:https://github.com/hitechcloudvn/hitechpos-sdk.git</developerConnection>
+        <url>https://github.com/hitechcloudvn/hitechpos-sdk</url>
+    </scm>
+
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

@@ -7,10 +7,10 @@ stay consistent across languages.
 ## Repository layout
 
 ```
-sdk/nodejs    TypeScript SDK  (@hitechcloud-vietnam/hitechpos-sdk)
+sdk/nodejs    TypeScript SDK  (@hitechcloudvn/hitechpos-sdk)
 sdk/python    Python SDK      (hitechpos)
-sdk/php       PHP SDK         (hitechcloud-vietnam/hitechpos-sdk)
-sdk/go        Go SDK          (github.com/hitechcloud-vietnam/hitechpos-sdk/go)
+sdk/php       PHP SDK         (hitechcloudvn/hitechpos-sdk)
+sdk/go        Go SDK          (github.com/hitechcloudvn/hitechpos-sdk/go)
 sdk/java      Java SDK        (vn.hitechcloud:hitechpos-sdk)
 mcp           Node MCP server
 docs          Vietnamese documentation
@@ -49,7 +49,7 @@ cd sdk/java && mvn -q compile
 ## Reporting issues
 
 Open an issue at
-<https://github.com/hitechcloud-vietnam/hitechpos-sdk/issues> with the language,
+<https://github.com/hitechcloudvn/hitechpos-sdk/issues> with the language,
 SDK version, a minimal reproduction, and the request/response (redact your token).
 
 ## License

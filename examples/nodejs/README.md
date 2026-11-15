@@ -5,7 +5,7 @@ Mẫu sử dụng cơ bản: khởi tạo client, liệt kê cửa hàng/sản p
 Đặt token trong biến môi trường `HITECHPOS_API_TOKEN` (và `HITECHPOS_WEBHOOK_SECRET` nếu kiểm tra webhook), rồi chạy:
 
 ```bash
-npm i @hitechcloud-vietnam/hitechpos-sdk && npx ts-node basic_usage.ts
+npm i @hitechcloudvn/hitechpos-sdk && npx ts-node basic_usage.ts
 ```
 
 Xem thêm README của SDK tại `../../sdk/nodejs`.

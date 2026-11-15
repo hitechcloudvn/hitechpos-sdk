@@ -5,13 +5,13 @@ Official TypeScript SDK for the [HiTechPos](https://pos.hitechcloud.vn) sales & 
 ## Installation
 
 ```bash
-npm install @hitechcloud-vietnam/hitechpos-sdk
+npm install @hitechcloudvn/hitechpos-sdk
 ```
 
 ## Quick start
 
 ```ts
-import { HiTechPos } from "@hitechcloud-vietnam/hitechpos-sdk";
+import { HiTechPos } from "@hitechcloudvn/hitechpos-sdk";
 
 const client = new HiTechPos({ token: "YOUR_API_TOKEN" });
 
@@ -30,7 +30,7 @@ const order = await client.orders.create(shopId, {
 ### Sandbox
 
 ```ts
-import { HiTechPos, SANDBOX_URL } from "@hitechcloud-vietnam/hitechpos-sdk";
+import { HiTechPos, SANDBOX_URL } from "@hitechcloudvn/hitechpos-sdk";
 const client = new HiTechPos({ token: "...", baseUrl: SANDBOX_URL });
 ```
 
@@ -47,7 +47,7 @@ for await (const product of client["http"].paginate(`/api/v1/shops/${shopId}/pro
 ## Error handling
 
 ```ts
-import { NotFoundError, RateLimitError, HiTechPosError } from "@hitechcloud-vietnam/hitechpos-sdk";
+import { NotFoundError, RateLimitError, HiTechPosError } from "@hitechcloudvn/hitechpos-sdk";
 
 try {
   await client.orders.get(shopId, "missing");
@@ -62,7 +62,7 @@ try {
 ## Webhooks
 
 ```ts
-import { verifySignature, parseEvent } from "@hitechcloud-vietnam/hitechpos-sdk";
+import { verifySignature, parseEvent } from "@hitechcloudvn/hitechpos-sdk";
 
 if (verifySignature(secret, rawBody, req.headers["x-hitechpos-signature"] as string)) {
   const event = parseEvent(rawBody);

@@ -1,5 +1,8 @@
 # HiTechPos SDK
 
+[![CI](https://github.com/hitechcloudvn/hitechpos-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/hitechcloudvn/hitechpos-sdk/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 > Official multi-language SDK for the [HiTechPos API](https://pos.hitechcloud.vn) —
 > the multi-channel sales & point-of-sale platform by HiTechCloud.
 > **116 methods across 21 resource groups.**
@@ -13,10 +16,10 @@ clean REST API with a unified JSON envelope.
 
 | Language | Package | Directory |
 |----------|---------|-----------|
-| Node.js / TypeScript | `@hitechcloud-vietnam/hitechpos-sdk` (npm) | [`sdk/nodejs`](sdk/nodejs) |
+| Node.js / TypeScript | `@hitechcloudvn/hitechpos-sdk` (npm) | [`sdk/nodejs`](sdk/nodejs) |
 | Python | `hitechpos` (PyPI) | [`sdk/python`](sdk/python) |
-| PHP | `hitechcloud-vietnam/hitechpos-sdk` (Composer) | [`sdk/php`](sdk/php) |
-| Go | `github.com/hitechcloud-vietnam/hitechpos-sdk/go` | [`sdk/go`](sdk/go) |
+| PHP | `hitechcloudvn/hitechpos-sdk` (Composer) | [`sdk/php`](sdk/php) |
+| Go | `github.com/hitechcloudvn/hitechpos-sdk/go` | [`sdk/go`](sdk/go) |
 | Java | `vn.hitechcloud:hitechpos-sdk` (Maven) | [`sdk/java`](sdk/java) |
 
 Also included: an [MCP server](mcp) and an [OpenAPI 3.0 spec](openapi.json).

@@ -2,7 +2,7 @@ import {
   HiTechPos,
   HiTechPosError,
   verifySignature,
-} from "@hitechcloud-vietnam/hitechpos-sdk";
+} from "@hitechcloudvn/hitechpos-sdk";
 
 async function main(): Promise<void> {
   const client = new HiTechPos({ token: process.env.HITECHPOS_API_TOKEN });

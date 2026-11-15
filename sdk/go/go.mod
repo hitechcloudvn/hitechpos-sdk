@@ -1,3 +1,3 @@
-module github.com/hitechcloud-vietnam/hitechpos-sdk/go
+module github.com/hitechcloudvn/hitechpos-sdk/go
 
 go 1.21

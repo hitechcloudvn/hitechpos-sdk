@@ -6,7 +6,7 @@ Requires PHP 8.0+ and Guzzle 7.
 ## Installation
 
 ```bash
-composer require hitechcloud-vietnam/hitechpos-sdk
+composer require hitechcloudvn/hitechpos-sdk
 ```
 
 ## Quick start

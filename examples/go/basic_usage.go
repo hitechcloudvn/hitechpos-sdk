@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	hitechpos "github.com/hitechcloud-vietnam/hitechpos-sdk/go"
+	hitechpos "github.com/hitechcloudvn/hitechpos-sdk/go"
 )
 
 func main() {

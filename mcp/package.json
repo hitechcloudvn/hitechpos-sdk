@@ -1,5 +1,5 @@
 {
-  "name": "@hitechcloud-vietnam/hitechpos-mcp-server",
+  "name": "@hitechcloudvn/hitechpos-mcp-server",
   "version": "1.0.0",
   "description": "MCP server for the HiTechPos API",
   "main": "server.js",
@@ -16,5 +16,15 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "homepage": "https://developers.hitechcloud.vn/tai-lieu/hitechpos",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hitechcloudvn/hitechpos-sdk.git",
+    "directory": "mcp"
+  },
+  "bugs": {
+    "url": "https://github.com/hitechcloudvn/hitechpos-sdk/issues"
+  },
+  "author": "HiTechCloud Vietnam <support@hitechcloud.vn>"
 }

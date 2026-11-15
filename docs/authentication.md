@@ -18,7 +18,7 @@ client = HiTechPos(token="YOUR_API_TOKEN")
 ```
 
 ```ts
-import { HiTechPos } from "@hitechcloud-vietnam/hitechpos-sdk";
+import { HiTechPos } from "@hitechcloudvn/hitechpos-sdk";
 const client = new HiTechPos({ token: "YOUR_API_TOKEN" });
 ```
 

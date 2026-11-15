@@ -5,7 +5,7 @@ Official Go SDK for the [HiTechPos](https://pos.hitechcloud.vn) sales & POS API.
 ## Installation
 
 ```bash
-go get github.com/hitechcloud-vietnam/hitechpos-sdk/go
+go get github.com/hitechcloudvn/hitechpos-sdk/go
 ```
 
 ## Quick start
@@ -17,7 +17,7 @@ import (
     "fmt"
     "log"
 
-    hitechpos "github.com/hitechcloud-vietnam/hitechpos-sdk/go"
+    hitechpos "github.com/hitechcloudvn/hitechpos-sdk/go"
 )
 
 func main() {
