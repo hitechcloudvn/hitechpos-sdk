@@ -7,6 +7,12 @@
 All notable changes to the HiTechPos SDK are documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.0.1] - 2026-11-16
+
+### Fixed
+- PHP SDK: add `phpunit.xml.dist` and smoke tests so `vendor/bin/phpunit`
+  runs the suite instead of printing help and failing the test job.
+
 ## [1.0.0] - 2026-11-01
 
 ### Added
