@@ -1,14 +1,22 @@
-# Giới hạn tần suất (Rate limiting)
+# Rate limiting
 
-HiTechPos giới hạn số lượng yêu cầu trong một khoảng thời gian. Khi vượt ngưỡng, API trả về mã `429 Too Many Requests` kèm header `Retry-After` (số giây nên chờ trước khi thử lại).
+> **English** | [Tiếng Việt](rate-limiting.vi.md)
 
-## SDK tự động thử lại
+---
 
-Mỗi SDK tự động thử lại các phản hồi `429` và `5xx` theo cơ chế *exponential backoff*:
+HiTechPos limits how many requests you can make in a period of time. When you exceed
+the quota, the API returns `429 Too Many Requests` with a `Retry-After` header
+(the number of seconds to wait before retrying).
 
-- Với `429`: chờ theo giá trị `Retry-After` (hoặc backoff luỹ thừa nếu không có header), rồi thử lại.
-- Với `5xx` và lỗi kết nối: chờ `2^lần_thử` giây rồi thử lại.
-- Số lần thử tối đa do `max_retries` quyết định (mặc định `3`). Sau khi hết lượt, SDK ném `RateLimitError` (hoặc `ServerError`).
+## Automatic SDK retries
+
+Each SDK automatically retries `429` and `5xx` responses using *exponential backoff*:
+
+- For `429`: wait the `Retry-After` value (or exponential backoff when the header is
+  absent), then retry.
+- For `5xx` and connection errors: wait `2^attempt` seconds, then retry.
+- The maximum number of attempts is set by `max_retries` (default `3`). Once they run
+  out, the SDK raises `RateLimitError` (or `ServerError`).
 
 ```python
 client = HiTechPos(token="...", max_retries=5)
@@ -22,7 +30,7 @@ const client = new HiTechPos({ token: "...", maxRetries: 5 });
 client := hitechpos.NewClient(hitechpos.WithToken("..."), hitechpos.WithMaxRetries(5))
 ```
 
-## Bắt lỗi khi hết lượt thử
+## Handling exhausted retries
 
 ```python
 from hitechpos import RateLimitError
@@ -30,13 +38,16 @@ from hitechpos import RateLimitError
 try:
     client.products.list(shop_id)
 except RateLimitError as e:
-    print("Bị giới hạn, thử lại sau", e.retry_after, "giây")
+    print("Rate limited, retry after", e.retry_after, "seconds")
 ```
 
-## Thực hành tốt
+## Best practices
 
-- **Phân trang hợp lý:** dùng `page_size` vừa phải (ví dụ 20–100) thay vì kéo toàn bộ dữ liệu một lần.
-- **Dùng webhook** thay cho hỏi vòng (polling) liên tục để nhận thay đổi gần như tức thời.
-- **Dùng `updated_since`** (khi endpoint hỗ trợ) để chỉ lấy dữ liệu thay đổi gần đây.
-- **Tôn trọng `Retry-After`** — không thử lại gấp hơn giá trị máy chủ yêu cầu.
-- **Gộp thao tác** qua các endpoint hàng loạt (ví dụ `transfers/multi`, `promotion_advance/create_multi`) khi có thể.
+- **Paginate sensibly:** use a moderate `page_size` (for example 20–100) instead of
+  pulling everything at once.
+- **Use webhooks** instead of continuous polling to receive changes almost instantly.
+- **Use `updated_since`** (where the endpoint supports it) to fetch only recently
+  changed data.
+- **Respect `Retry-After`** — never retry faster than the server asks.
+- **Batch operations** through bulk endpoints (for example `transfers/multi`,
+  `promotion_advance/create_multi`) where possible.

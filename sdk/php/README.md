@@ -1,5 +1,9 @@
 # HiTechPos PHP SDK
 
+> **English** | [Tiếng Việt](README.vi.md)
+
+---
+
 Official PHP SDK for the [HiTechPos](https://pos.hitechcloud.vn) sales & POS API.
 Requires PHP 8.0+ and Guzzle 7.
 

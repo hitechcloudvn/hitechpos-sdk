@@ -1,5 +1,9 @@
 # HiTechPos SDK
 
+> **English** | [Tiếng Việt](README.vi.md)
+
+---
+
 [![CI](https://github.com/hitechcloudvn/hitechpos-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/hitechcloudvn/hitechpos-sdk/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -104,8 +108,8 @@ before processing.
 
 ## Documentation
 
-Vietnamese docs live in [`docs/`](docs): getting started, authentication, API
-reference, error handling and rate limiting.
+Documentation lives in [`docs/`](docs) in English and Vietnamese: getting started,
+authentication, API reference, error handling and rate limiting.
 
 ## License
 

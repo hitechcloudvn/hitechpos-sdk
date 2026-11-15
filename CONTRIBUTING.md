@@ -1,5 +1,9 @@
 # Contributing to the HiTechPos SDK
 
+> **English** | [Tiếng Việt](CONTRIBUTING.vi.md)
+
+---
+
 Thanks for helping improve the official HiTechPos SDK. This repository hosts SDKs
 for five languages that all target the same `/api/v1` surface, so changes should
 stay consistent across languages.
@@ -13,7 +17,7 @@ sdk/php       PHP SDK         (hitechcloudvn/hitechpos-sdk)
 sdk/go        Go SDK          (github.com/hitechcloudvn/hitechpos-sdk/go)
 sdk/java      Java SDK        (vn.hitechcloud:hitechpos-sdk)
 mcp           Node MCP server
-docs          Vietnamese documentation
+docs          Bilingual documentation (EN + VI)
 examples      Per-language usage examples
 openapi.json  OpenAPI 3.0 specification
 ```

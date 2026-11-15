@@ -1,5 +1,9 @@
 # Changelog
 
+> **English** | [Tiếng Việt](CHANGELOG.vi.md)
+
+---
+
 All notable changes to the HiTechPos SDK are documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 

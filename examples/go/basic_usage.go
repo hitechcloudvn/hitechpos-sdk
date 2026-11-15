@@ -13,7 +13,7 @@ func main() {
 		hitechpos.WithToken(os.Getenv("HITECHPOS_API_TOKEN")),
 	)
 
-	// 1. List accessible shops.
+	// 1. List accessible shops. / Liệt kê cửa hàng có thể truy cập.
 	shops, err := client.Shops.List(nil)
 	if err != nil {
 		log.Fatal(err)
@@ -26,7 +26,7 @@ func main() {
 	shopID := fmt.Sprintf("%v", shop["id"])
 	fmt.Println("Shop:", shopID)
 
-	// 2. List products (single page).
+	// 2. List products (single page). / Liệt kê sản phẩm (một trang).
 	products, err := client.Products.List(shopID, map[string]string{
 		"page_number": "1",
 		"page_size":   "20",
@@ -36,7 +36,7 @@ func main() {
 	}
 	fmt.Println("Products:", products["data"])
 
-	// 3. Create an order.
+	// 3. Create an order. / Tạo một đơn hàng.
 	order, err := client.Orders.Create(shopID, map[string]interface{}{
 		"customer":     map[string]string{"name": "Nguyen Van A", "phone": "0900000000"},
 		"warehouse_id": "wh_1",
@@ -54,10 +54,10 @@ func main() {
 		fmt.Println("Created order:", order["data"])
 	}
 
-	// 4. Verify a webhook signature inside your receiver.
+	// 4. Verify a webhook signature inside your receiver. / Kiểm tra chữ ký webhook trong endpoint nhận webhook.
 	secret := os.Getenv("HITECHPOS_WEBHOOK_SECRET")
 	rawBody := []byte(`{"event":"order.created"}`)
-	signature := "..." // from X-HitechPos-Signature header
+	signature := "..." // from X-HitechPos-Signature header / lấy từ header X-HitechPos-Signature
 	if hitechpos.VerifySignature(secret, rawBody, signature) {
 		fmt.Println("Webhook signature OK")
 	}

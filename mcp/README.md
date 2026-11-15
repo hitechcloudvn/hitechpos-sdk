@@ -1,5 +1,9 @@
 # HiTechPos MCP Server
 
+> **English** | [Tiếng Việt](README.vi.md)
+
+---
+
 A [Model Context Protocol](https://modelcontextprotocol.io) server that exposes core
 HiTechPos read operations as tools, so an MCP-capable assistant can query your shops,
 products, orders, inventory, customers and sales reports.

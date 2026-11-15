@@ -1,8 +1,13 @@
-# Xác thực
+# Authentication
 
-HiTechPos API xác thực bằng **API token** gửi kèm trong mỗi yêu cầu dưới dạng Bearer Token.
+> **English** | [Tiếng Việt](authentication.vi.md)
 
-## Header xác thực
+---
+
+The HiTechPos API authenticates with an **API token** sent with every request as a
+Bearer token.
+
+## Authentication header
 
 ```
 Authorization: Bearer YOUR_API_TOKEN
@@ -10,7 +15,7 @@ Content-Type: application/json
 Accept: application/json
 ```
 
-SDK tự động gắn header này sau khi bạn truyền `token` vào client.
+The SDK attaches this header automatically once you pass `token` to the client.
 
 ```python
 from hitechpos import HiTechPos
@@ -34,29 +39,31 @@ client := hitechpos.NewClient(hitechpos.WithToken("YOUR_API_TOKEN"))
 HiTechPos client = new HiTechPos("YOUR_API_TOKEN");
 ```
 
-## Đổi token khi đang chạy
+## Rotating the token at runtime
 
 ```python
 client.set_token("NEW_TOKEN")
 ```
 
-Tất cả SDK đều có `set_token` / `setToken` / `SetToken`.
+Every SDK exposes `set_token` / `setToken` / `SetToken`.
 
-## Phạm vi cửa hàng
+## Shop scope
 
-Mỗi token được cấp quyền truy cập một hoặc nhiều cửa hàng. Dùng `client.shops.list()` để biết token của bạn truy cập được những cửa hàng nào, rồi dùng `shop_id` tương ứng cho các lời gọi tiếp theo.
+Each token is granted access to one or more shops. Use `client.shops.list()` to see
+which shops your token can access, then pass the matching `shop_id` on later calls.
 
-## Môi trường
+## Environments
 
-| Môi trường | Base URL |
+| Environment | Base URL |
 |------------|----------|
 | Production | `https://pos.hitechcloud.vn` |
 | Sandbox | `https://pos-sandbox.hitechcloud.vn` |
 
-Dữ liệu sandbox tách biệt hoàn toàn với production — dùng để thử đẩy đơn, trừ kho và nhận webhook mà không ảnh hưởng dữ liệu thật.
+Sandbox data is fully isolated from production — use it to try pushing orders,
+deducting stock and receiving webhooks without touching real data.
 
-## Bảo mật khoá
+## Key security
 
-- Không nhúng token vào mã frontend (JavaScript trình duyệt, mobile).
-- Lưu token trong biến môi trường hoặc kho bí mật (secret manager).
-- Thu hồi và cấp lại token ngay nếu nghi ngờ bị lộ.
+- Do not embed the token in frontend code (browser JavaScript, mobile apps).
+- Store the token in an environment variable or a secret manager.
+- Revoke and reissue the token immediately if you suspect it has leaked.

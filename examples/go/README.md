@@ -1,11 +1,17 @@
-# HiTechPos SDK — ví dụ go
+# HiTechPos SDK — Go example
 
-Mẫu sử dụng cơ bản: khởi tạo client, liệt kê cửa hàng/sản phẩm, tạo đơn hàng và kiểm tra chữ ký webhook.
+> **English** | [Tiếng Việt](README.vi.md)
 
-Đặt token trong biến môi trường `HITECHPOS_API_TOKEN` (và `HITECHPOS_WEBHOOK_SECRET` nếu kiểm tra webhook), rồi chạy:
+---
+
+Basic usage sample: create a client, list shops/products, create an order, and verify a
+webhook signature.
+
+Put the token in the `HITECHPOS_API_TOKEN` environment variable (and
+`HITECHPOS_WEBHOOK_SECRET` if you verify webhooks), then run:
 
 ```bash
 go run basic_usage.go
 ```
 
-Xem thêm README của SDK tại `../../sdk/go`.
+See the SDK README at `../../sdk/go`.

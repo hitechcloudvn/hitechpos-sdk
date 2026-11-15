@@ -1,20 +1,27 @@
-# Xử lý lỗi
+# Error handling
 
-Khi API trả về mã trạng thái `>= 400`, SDK sẽ ném (throw) một ngoại lệ có kiểu tương ứng thay vì trả về dữ liệu. Nhờ đó bạn có thể bắt đúng loại lỗi cần xử lý.
+> **English** | [Tiếng Việt](error-handling.vi.md)
 
-## Bảng ánh xạ lỗi
+---
 
-| HTTP | Lớp ngoại lệ | Ý nghĩa |
+When the API returns a status code `>= 400`, the SDK throws a typed exception instead
+of returning data, so you can catch exactly the error kind you need to handle.
+
+## Error mapping
+
+| HTTP | Exception class | Meaning |
 |------|--------------|---------|
-| 401 | `AuthenticationError` | Token thiếu hoặc không hợp lệ |
-| 403 | `AuthorizationError` | Token không có quyền với cửa hàng/tài nguyên này |
-| 404 | `NotFoundError` | Không tìm thấy tài nguyên |
-| 422 | `ValidationError` | Dữ liệu gửi lên không hợp lệ |
-| 429 | `RateLimitError` | Vượt giới hạn tần suất (có `retry_after`) |
-| 5xx | `ServerError` | Lỗi phía máy chủ |
-| khác | `HiTechPosError` | Lỗi cơ sở / không xác định |
+| 401 | `AuthenticationError` | Token missing or invalid |
+| 403 | `AuthorizationError` | Token has no access to this shop/resource |
+| 404 | `NotFoundError` | Resource not found |
+| 422 | `ValidationError` | Submitted data is invalid |
+| 429 | `RateLimitError` | Rate limit exceeded (carries `retry_after`) |
+| 5xx | `ServerError` | Server-side error |
+| other | `HiTechPosError` | Base / unknown error |
 
-Tất cả lớp trên kế thừa từ `HiTechPosError` (Python/JS/PHP/Java) hoặc triển khai `error` với struct `HiTechPosError` (Go). Mỗi lỗi mang `status_code`/`statusCode`, thông điệp, và dữ liệu phản hồi gốc.
+All of the classes above inherit from `HiTechPosError` (Python/JS/PHP/Java) or implement
+`error` with the `HiTechPosError` struct (Go). Every error carries `status_code`/
+`statusCode`, a message, and the raw response data.
 
 ## Python
 
@@ -28,7 +35,7 @@ except NotFoundError:
 except ValidationError as e:
     print(e.errors)
 except RateLimitError as e:
-    print("thử lại sau", e.retry_after, "giây")
+    print("retry after", e.retry_after, "seconds")
 except HiTechPosError as e:
     print(e.status_code, e.message)
 ```
@@ -65,7 +72,7 @@ try {
 ```go
 _, err := client.Orders.Get("shop_123", "khong_ton_tai")
 if nf, ok := err.(*hitechpos.NotFoundError); ok {
-    fmt.Println("không tìm thấy:", nf.Message)
+    fmt.Println("not found:", nf.Message)
 }
 ```
 
@@ -81,13 +88,13 @@ try {
 }
 ```
 
-## Cấu trúc lỗi trả về
+## Error response shape
 
 ```json
 {
   "status": "error",
-  "error": "Mô tả lỗi"
+  "error": "Error description"
 }
 ```
 
-SDK đọc trường `error` (hoặc `message`) để dựng thông điệp của ngoại lệ.
+The SDK reads the `error` (or `message`) field to build the exception message.

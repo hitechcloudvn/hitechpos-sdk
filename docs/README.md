@@ -1,24 +1,29 @@
-# Tài liệu HiTechPos SDK
+# HiTechPos SDK Documentation
 
-Chào mừng bạn đến với tài liệu của bộ SDK HiTechPos — nền tảng bán hàng đa kênh và điểm bán (POS) của HiTechCloud.
+> **English** | [Tiếng Việt](README.vi.md)
 
-## Mục lục
+---
 
-- [Bắt đầu nhanh](getting-started.md)
-- [Xác thực](authentication.md)
-- [Tham chiếu API](api-reference.md)
-- [Xử lý lỗi](error-handling.md)
-- [Giới hạn tần suất (Rate limiting)](rate-limiting.md)
+Welcome to the documentation for the HiTechPos SDK — HiTechCloud's multi-channel
+sales and point-of-sale (POS) platform.
 
-## Liên kết nhanh
+## Table of contents
 
-- Đặc tả OpenAPI: [`../openapi.json`](../openapi.json)
-- Kho mã nguồn: <https://github.com/hitechcloudvn/hitechpos-sdk>
-- Cổng quản trị HiTechPos: <https://pos.hitechcloud.vn>
+- [Getting started](getting-started.md)
+- [Authentication](authentication.md)
+- [API reference](api-reference.md)
+- [Error handling](error-handling.md)
+- [Rate limiting](rate-limiting.md)
 
-## SDK theo ngôn ngữ
+## Quick links
 
-| Ngôn ngữ | Gói | Thư mục |
+- OpenAPI specification: [`../openapi.json`](../openapi.json)
+- Source repository: <https://github.com/hitechcloudvn/hitechpos-sdk>
+- HiTechPos admin portal: <https://pos.hitechcloud.vn>
+
+## SDKs by language
+
+| Language | Package | Directory |
 |----------|-----|---------|
 | Node.js / TypeScript | `@hitechcloudvn/hitechpos-sdk` | [`../sdk/nodejs`](../sdk/nodejs) |
 | Python | `hitechpos` | [`../sdk/python`](../sdk/python) |

@@ -1,17 +1,23 @@
-# Bắt đầu nhanh với HiTechPos SDK
+# Getting started with HiTechPos SDK
 
-Hướng dẫn này giúp bạn kết nối HiTechPos API trong vài phút: tạo khoá, lấy ID cửa hàng, và gọi yêu cầu đầu tiên.
+> **English** | [Tiếng Việt](getting-started.vi.md)
 
-## 1. Tạo API Key
+---
 
-1. Đăng nhập cổng quản trị HiTechPos tại `https://pos.hitechcloud.vn`.
-2. Vào **Cấu hình** → **API & Tích hợp** → **API Key**.
-3. Nhấn **+ Tạo API Key mới**, đặt tên ứng dụng và chọn phạm vi cửa hàng.
-4. Sao chép **API Key** (chỉ hiển thị một lần) và lưu vào biến môi trường.
+This guide connects you to the HiTechPos API in minutes: create a key, get a shop
+ID, and make your first request.
 
-> ⚠️ API Key có quyền đọc/ghi dữ liệu bán hàng. Không nhúng vào mã frontend và không commit lên kho mã công khai.
+## 1. Create an API key
 
-## 2. Cài đặt SDK
+1. Sign in to the HiTechPos admin portal at `https://pos.hitechcloud.vn`.
+2. Go to **Configuration** → **API & Integrations** → **API Key**.
+3. Click **+ Create new API key**, name the application and pick the shop scope.
+4. Copy the **API key** (shown only once) and store it in an environment variable.
+
+> ⚠️ The API key has read/write access to sales data. Do not embed it in frontend
+> code and do not commit it to a public repository.
+
+## 2. Install the SDK
 
 ```bash
 # Python
@@ -30,7 +36,7 @@ go get github.com/hitechcloudvn/hitechpos-sdk/go
 # <dependency><groupId>vn.hitechcloud</groupId><artifactId>hitechpos-sdk</artifactId><version>1.0.0</version></dependency>
 ```
 
-## 3. Khởi tạo client
+## 3. Create a client
 
 ```python
 from hitechpos import HiTechPos
@@ -39,39 +45,40 @@ client = HiTechPos(token="YOUR_API_TOKEN")           # production
 # client = HiTechPos(token="...", base_url=HiTechPos.SANDBOX_URL)  # sandbox
 ```
 
-Tham số khởi tạo (giống nhau trên mọi SDK):
+Constructor parameters (the same across every SDK):
 
-| Tham số | Mặc định | Ý nghĩa |
+| Parameter | Default | Meaning |
 |---------|----------|---------|
-| `token` | — | API token, gửi dưới dạng Bearer |
-| `base_url` | `https://pos.hitechcloud.vn` | URL gốc (đổi sang sandbox khi test) |
-| `timeout` | `30` | Thời gian chờ mỗi yêu cầu (giây) |
-| `max_retries` | `3` | Số lần thử lại khi gặp `429` / `5xx` |
+| `token` | — | API token, sent as a Bearer token |
+| `base_url` | `https://pos.hitechcloud.vn` | Base URL (switch to sandbox for testing) |
+| `timeout` | `30` | Per-request timeout (seconds) |
+| `max_retries` | `3` | Retry attempts on `429` / `5xx` |
 
-## 4. Lấy danh sách cửa hàng
+## 4. List shops
 
-Mọi tài nguyên nghiệp vụ đều thuộc về một cửa hàng và truy cập theo đường dẫn lồng `/api/v1/shops/{shop_id}/...`.
+Every business resource belongs to a shop and is addressed through the nested path
+`/api/v1/shops/{shop_id}/...`.
 
 ```python
 shops = client.shops.list()
 shop_id = shops["data"][0]["id"]
 ```
 
-## 5. Liệt kê sản phẩm và tạo đơn hàng
+## 5. List products and create an order
 
 ```python
 products = client.products.list(shop_id, params={"page_number": 1, "page_size": 20})
 
 order = client.orders.create(shop_id, {
-    "customer": {"name": "Nguyễn Văn A", "phone": "0900000000"},
+    "customer": {"name": "Nguyen Van A", "phone": "0900000000"},
     "items": [{"variation_id": "var_123", "quantity": 1, "price": 99000}],
     "warehouse_id": "wh_1",
 })
 ```
 
-## 6. Bước tiếp theo
+## 6. Next steps
 
-- [Xác thực](authentication.md)
-- [Tham chiếu API đầy đủ](api-reference.md)
-- [Xử lý lỗi](error-handling.md)
-- [Giới hạn tần suất](rate-limiting.md)
+- [Authentication](authentication.md)
+- [Full API reference](api-reference.md)
+- [Error handling](error-handling.md)
+- [Rate limiting](rate-limiting.md)

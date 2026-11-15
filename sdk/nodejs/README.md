@@ -1,5 +1,9 @@
 # HiTechPos Node.js / TypeScript SDK
 
+> **English** | [Tiếng Việt](README.vi.md)
+
+---
+
 Official TypeScript SDK for the [HiTechPos](https://pos.hitechcloud.vn) sales & POS API.
 
 ## Installation

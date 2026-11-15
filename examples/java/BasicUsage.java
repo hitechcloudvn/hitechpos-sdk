@@ -9,21 +9,21 @@ public class BasicUsage {
     public static void main(String[] args) {
         HiTechPos client = new HiTechPos(System.getenv("HITECHPOS_API_TOKEN"));
 
-        // 1. List accessible shops.
+        // 1. List accessible shops. / Liệt kê cửa hàng có thể truy cập.
         Map<String, Object> shops = client.shops().list(null);
         @SuppressWarnings("unchecked")
         List<Map<String, Object>> shopList = (List<Map<String, Object>>) shops.get("data");
         String shopId = shopList.get(0).get("id").toString();
         System.out.println("Shop: " + shopId);
 
-        // 2. List products (single page).
+        // 2. List products (single page). / Liệt kê sản phẩm (một trang).
         Map<String, Object> products = client.products().list(shopId, Map.of(
                 "page_number", "1",
                 "page_size", "20"
         ));
         System.out.println("Products: " + products.get("data"));
 
-        // 3. Create an order.
+        // 3. Create an order. / Tạo một đơn hàng.
         try {
             Map<String, Object> order = client.orders().create(shopId, Map.of(
                     "customer", Map.of("name", "Nguyen Van A", "phone", "0900000000"),
@@ -35,10 +35,10 @@ public class BasicUsage {
             System.err.println("API error: " + e.getStatusCode() + " " + e.getMessage());
         }
 
-        // 4. Verify a webhook signature inside your receiver.
+        // 4. Verify a webhook signature inside your receiver. / Kiểm tra chữ ký webhook trong endpoint nhận webhook.
         String secret = System.getenv("HITECHPOS_WEBHOOK_SECRET");
         String rawBody = "{\"event\":\"order.created\"}";
-        String signature = "..."; // from X-HitechPos-Signature header
+        String signature = "..."; // from X-HitechPos-Signature header / lấy từ header X-HitechPos-Signature
         if (Webhook.verifySignature(secret, rawBody, signature)) {
             System.out.println("Webhook signature OK");
         }

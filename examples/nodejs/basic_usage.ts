@@ -7,19 +7,19 @@ import {
 async function main(): Promise<void> {
   const client = new HiTechPos({ token: process.env.HITECHPOS_API_TOKEN });
 
-  // 1. List accessible shops.
+  // 1. List accessible shops. / Liệt kê cửa hàng có thể truy cập.
   const shops = (await client.shops.list()) as { data: Array<{ id: string }> };
   const shopId = shops.data[0].id;
   console.log("Shop:", shopId);
 
-  // 2. List products (single page).
+  // 2. List products (single page). / Liệt kê sản phẩm (một trang).
   const products = (await client.products.list(shopId, {
     page_number: 1,
     page_size: 20,
   })) as { data: unknown[] };
   console.log("Products on page 1:", products.data.length);
 
-  // 3. Create an order.
+  // 3. Create an order. / Tạo một đơn hàng.
   try {
     const order = (await client.orders.create(shopId, {
       customer: { name: "Nguyen Van A", phone: "0900000000" },
@@ -35,10 +35,10 @@ async function main(): Promise<void> {
     }
   }
 
-  // 4. Verify a webhook signature inside your receiver.
+  // 4. Verify a webhook signature inside your receiver. / Kiểm tra chữ ký webhook trong endpoint nhận webhook.
   const secret = process.env.HITECHPOS_WEBHOOK_SECRET ?? "";
   const rawBody = '{"event":"order.created"}';
-  const signature = "..."; // from X-HitechPos-Signature header
+  const signature = "..."; // from X-HitechPos-Signature header / lấy từ header X-HitechPos-Signature
   if (verifySignature(secret, rawBody, signature)) {
     console.log("Webhook signature OK");
   }

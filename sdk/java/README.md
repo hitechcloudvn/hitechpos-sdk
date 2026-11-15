@@ -1,5 +1,9 @@
 # HiTechPos Java SDK
 
+> **English** | [Tiếng Việt](README.vi.md)
+
+---
+
 Official Java SDK for the [HiTechPos](https://pos.hitechcloud.vn) sales & POS API.
 
 ## Installation

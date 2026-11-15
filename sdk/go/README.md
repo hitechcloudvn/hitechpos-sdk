@@ -1,5 +1,9 @@
 # HiTechPos Go SDK
 
+> **English** | [Tiếng Việt](README.vi.md)
+
+---
+
 Official Go SDK for the [HiTechPos](https://pos.hitechcloud.vn) sales & POS API.
 
 ## Installation
